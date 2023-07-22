@@ -40,7 +40,6 @@
 | id(PK) | integer | null: false |
 | user(FK) | references | null: false, foreign_key: true |
 | item(FK) | references | null: false, foreign_key: true |
-| shipping(FK) | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -51,12 +50,13 @@
 | Column | Type | Option |
 |-|-|-|
 | id(PK) | integer | null: false |
-| post_code | integer | null: false |
+| post_code | string | null: false |
 | prefecture_id | integer | null: false |
 | city | string | null: false |
 | address | string | null: false |
 | building | string |
 | telephone_number | integer | null: false |
+| purchase(FK) | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :purchase
