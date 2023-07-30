@@ -84,3 +84,5 @@ group :development do
 end
 
 gem 'pry-rails'
+gem 'payjp'
+gem 'gon'

@@ -16,6 +16,10 @@ RSpec.describe PurchaseShipping, type: :model do
         @purchase_shipping.building = nil
         expect(@purchase_shipping).to be_valid
       end
+
+      it 'priceとtokenがあれば保存ができること' do
+        expect(@purchase_shipping).to be_valid
+      end
     end
 
     context '内容に問題がある場合' do
@@ -67,6 +71,12 @@ RSpec.describe PurchaseShipping, type: :model do
 
         @purchase_shipping.telephone_number = '090-1234-56789'
         expect(@purchase_shipping).not_to be_valid
+      end
+
+      it 'tokenが空では登録できないこと' do
+        @purchase_shipping.token = nil
+        @purchase_shipping.valid?
+        expect(@purchase_shipping.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
