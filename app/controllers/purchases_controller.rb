@@ -5,17 +5,20 @@ class PurchasesController < ApplicationController
   def index
     @purchase_shipping = PurchaseShipping.new
     @item = Item.find(params[:item_id])
-    return unless @item.user == current_user
-
-    redirect_to root_path
+  
+    if @item.sold? || @item.user == current_user
+      redirect_to root_path
+      return
+    end
   end
 
   def create
     @purchase_shipping = PurchaseShipping.new(purchase_params)
     @item = Item.find(params[:item_id])
-
+  
     if @item.sold? || @item.user == current_user
       redirect_to root_path
+      return
     elsif @purchase_shipping.valid?
       pay_item
       @purchase_shipping.save
