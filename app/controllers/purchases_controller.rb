@@ -33,11 +33,11 @@ class PurchasesController < ApplicationController
   def find_item
     @item = Item.find(params[:item_id])
   end
-
+  
   def purchase_params
-    item = Item.find(params[:item_id])
+    find_item
     params.require(:purchase_shipping).permit(:post_code, :prefecture_id, :city, :address, :building, :telephone_number)
-          .merge(user_id: current_user.id, item_id: item.id, token: params[:token])
+          .merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
   end
 
   def pay_item
