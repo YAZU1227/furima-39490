@@ -1,10 +1,11 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_public_key, only: [:index, :create]
+  before_action :find_item, only: [:index, :create]
+
 
   def index
     @purchase_shipping = PurchaseShipping.new
-    @item = Item.find(params[:item_id])
   
     if @item.sold? || @item.user == current_user
       redirect_to root_path
@@ -14,7 +15,6 @@ class PurchasesController < ApplicationController
 
   def create
     @purchase_shipping = PurchaseShipping.new(purchase_params)
-    @item = Item.find(params[:item_id])
   
     if @item.sold? || @item.user == current_user
       redirect_to root_path
@@ -29,6 +29,10 @@ class PurchasesController < ApplicationController
   end
 
   private
+
+  def find_item
+    @item = Item.find(params[:item_id])
+  end
 
   def purchase_params
     item = Item.find(params[:item_id])

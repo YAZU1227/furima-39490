@@ -9,11 +9,13 @@ class PurchaseShipping
     validates :address
     validates :telephone_number, numericality: { only_integer: true }, length: { in: 10..11 }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   def save
-    purchase = Purchase.create(user_id:, item_id:)
-    Shipping.create(post_code:, prefecture_id:, city:, address:, building:,
-                    telephone_number:, purchase_id: purchase.id)
+  purchase = Purchase.create(user_id: user_id, item_id: item_id)
+  Shipping.create(post_code: post_code, prefecture_id: prefecture_id, city: city, address: address, building: building,
+                  telephone_number: telephone_number, purchase_id: purchase.id)
   end
 end

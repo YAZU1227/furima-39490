@@ -22,8 +22,6 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
-
     return unless @item.sold? && @item.user == current_user
 
     redirect_to root_path
