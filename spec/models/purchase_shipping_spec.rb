@@ -37,9 +37,9 @@ RSpec.describe PurchaseShipping, type: :model do
       end
   
       it 'prefecture_idを選択していないと保存できないこと' do
-        @purchase_shipping.prefecture_id = nil
+        @purchase_shipping.prefecture_id = 0
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@purchase_shipping.errors.full_messages).to include("Prefecture must be other than 0")
       end
   
       it 'cityが空だと保存できないこと' do
