@@ -7,7 +7,7 @@ class PurchaseShipping
     validates :prefecture_id, numericality: { other_than: 0 }
     validates :city
     validates :address
-    validates :telephone_number, numericality: { only_integer: true }, length: { in: 10..11 }
+    validates :telephone_number, format: { with: /\A\d{10,11}\z/ }
     validates :token
     validates :user_id
     validates :item_id

@@ -63,19 +63,19 @@ RSpec.describe PurchaseShipping, type: :model do
       it 'telephone_numberは、9桁以下だと保存できないこと' do
         @purchase_shipping.telephone_number = '090123456'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Telephone number is too short (minimum is 10 characters)")
+        expect(@purchase_shipping.errors.full_messages).to include("Telephone number is invalid")
       end
 
       it 'telephone_numberは、12桁以上だと保存できないこと' do
         @purchase_shipping.telephone_number = '090123456789'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Telephone number is too long (maximum is 11 characters)")
+        expect(@purchase_shipping.errors.full_messages).to include("Telephone number is invalid")
       end
 
       it 'telephone_numberは、半角数値以外が含まれていると保存できないこと' do
         @purchase_shipping.telephone_number = '09012345678!'
         @purchase_shipping.valid?
-        expect(@purchase_shipping.errors.full_messages).to include("Telephone number is not a number")
+        expect(@purchase_shipping.errors.full_messages).to include("Telephone number is invalid")
       end
 
       it 'tokenが空では登録できないこと' do
